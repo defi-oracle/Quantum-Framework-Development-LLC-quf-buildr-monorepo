@@ -1,0 +1,56 @@
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockchain-deployment
+  labels:
+    app: blockchain
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blockchain
+  template:
+    metadata:
+      labels:
+        app: blockchain
+    spec:
+      containers:
+      - name: quantum-unity-framework
+        image: blockchain_0x0
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      - name: global-digital-currency-network
+        image: blockchain_0x9
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      - name: contudo
+        image: blockchain_0x8A
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockchain-service
+spec:
+  selector:
+    app: blockchain
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+```
